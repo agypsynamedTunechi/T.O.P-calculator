@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --boder-color: #334443;
+    
+}
+
+body{
+    background-color: #FFFBDF;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    font-family: lato, sans-serif;
+    font-weight: 900;
+   
+}
+
+.container{
+    border: 3px solid black;
+    border-radius: 15px;
+    box-shadow: 7px 7px black;
+    width: 320px;
+    height: 500px;
+    margin-top: 50px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#display{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 20px 10px;
+   
+}
+
+#total{
+    font-size: 50px;
+}
+
+#number{
+    font-size: 25px;
+    color: #334443;
+}
+
+.btn-container{
+    border-radius: 15px;
+    background-color: #C6FFC1   ;
+    padding: 15px;
+    padding-top: 50px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-container div{
+    flex: 1;
+    display: flex;
+     gap: 10px;
+}
+
+button{
+    flex: 1;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 20px;
+    box-shadow: 3px 3px black;
+}
+
+.last-btn button:last-child{
+    flex: 2;
+}
