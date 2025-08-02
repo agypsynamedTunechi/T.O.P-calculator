@@ -104,7 +104,7 @@ function display() {
   decimal.addEventListener("click", () => {
     let decimalValue = decimal.getAttribute("value");
     if (decimalIsAllowed) {
-      if(firstNum){
+      if(operator === ""){
         firstNum += decimalValue;
         numberDisplay.textContent = firstNum;
       }else{
