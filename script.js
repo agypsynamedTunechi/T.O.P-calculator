@@ -110,7 +110,7 @@ function display() {
         numberDisplay.textContent = firstNum;
       }else{
         secondNum += decimalValue;
-        numberDisplay.textContent = secondNum;
+        numberDisplay.textContent = `${firstNum}${operator}${secondNum}`;
       }
 
       
