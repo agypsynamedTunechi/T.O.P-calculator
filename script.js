@@ -86,8 +86,12 @@ function display() {
         }
      }else {
         operate(firstNum, operator, secondNum);
+        if(!operator){
+          firstNum = 0
+        }else{
         firstNum = numberDisplay.textContent;
             secondNum = "";
+        }
       }
     });
   });
