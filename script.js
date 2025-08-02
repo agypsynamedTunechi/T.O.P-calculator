@@ -94,9 +94,10 @@ function display() {
       if (operator === "") {
         firstNum += numberValue;
         numberDisplay.textContent = firstNum;
-      } else {
+        
+      }else{
         secondNum += numberValue;
-        numberDisplay.textContent = secondNum;
+        numberDisplay.textContent = `${firstNum}${operator}${secondNum}`;
       }
     });
   });
