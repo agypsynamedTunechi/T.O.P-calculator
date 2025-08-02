@@ -39,15 +39,12 @@ body{
     flex-direction: column;
     align-items: flex-end;
     padding: 20px 10px;
+    flex: 1;
    
 }
 
-#total{
+#number-display{
     font-size: 50px;
-}
-
-#number{
-    font-size: 25px;
     color: #334443;
 }
 
@@ -56,7 +53,7 @@ body{
     background-color: #C6FFC1   ;
     padding: 15px;
     padding-top: 50px;
-    flex: 1;
+    flex: 4;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -73,7 +70,7 @@ button{
     border-radius: 15px;
     font-weight: bold;
     font-size: 20px;
-    box-shadow: 3px 3px black;
+    box-shadow: 2px 2px black;
 }
 
 .last-btn button:last-child{
