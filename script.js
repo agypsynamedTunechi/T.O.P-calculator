@@ -8,27 +8,53 @@ const clear = document.querySelector("#clear");
 
 function add(a, b) {
   let total = Number(a) + Number(b);
-  return total;
+  let str = total.toString()
+  if(str.length > 13){
+    return total.toPrecision(13)
+  }else{
+    return total
+  }
 }
 
 function subtract(a, b) {
   let total = Number(a) - Number(b);
-  return total;
+  let str = total.toString()
+  if(str.length > 13){
+    return total.toPrecision(13)
+  }else{
+    return total
+  }
 }
 
 function divide(a, b) {
   let total = Number(a) / Number(b);
-  return total;
+  let str = total.toString()
+  if(str.length > 13){
+    return total.toPrecision(13)
+  }else{
+    return total
+  }
+  
 }
 
 function multiply(a, b) {
   let total = Number(a) * Number(b);
-  return total;
+  let str = total.toString()
+  if(str.length > 13){
+    return total.toPrecision(13)
+  }else{
+    return total
+  }
 }
 
 function modulus(a, b) {
   let total = Number(a) % Number(b);
-  return total;
+  let str = total.toString()
+  if(str.length > 13){
+    return total.toPrecision(13)
+  }else{
+    return total
+  }
 }
 
 let firstNum = "";
@@ -61,7 +87,7 @@ function operate(num1, op, num2) {
 }
 
 function display() {
-  
+
   numbers.forEach((number) => {
     number.addEventListener("click", () => {
       let numberValue = number.getAttribute("value");
