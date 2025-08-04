@@ -8,53 +8,27 @@ const clear = document.querySelector("#clear");
 
 function add(a, b) {
   let total = Number(a) + Number(b);
-  let str = total.toString()
-  if(str.length > 13){
-    return total.toPrecision(13)
-  }else{
-    return total
-  }
+  return parseFloat(total.toFixed(7));
 }
 
 function subtract(a, b) {
   let total = Number(a) - Number(b);
-  let str = total.toString()
-  if(str.length > 13){
-    return total.toPrecision(13)
-  }else{
-    return total
-  }
+  return parseFloat(total.toFixed(7));
 }
 
 function divide(a, b) {
   let total = Number(a) / Number(b);
-  let str = total.toString()
-  if(str.length > 13){
-    return total.toPrecision(13)
-  }else{
-    return total
-  }
-  
+  return parseFloat(total.toFixed(7));
 }
 
 function multiply(a, b) {
   let total = Number(a) * Number(b);
-  let str = total.toString()
-  if(str.length > 13){
-    return total.toPrecision(13)
-  }else{
-    return total
-  }
+  return parseFloat(total.toFixed(7));
 }
 
 function modulus(a, b) {
   let total = Number(a) % Number(b);
-  let str = total.toString()
-  if(str.length > 13){
-    return total.toPrecision(13)
-  }else{
-    return total
-  }
+  return parseFloat(total.toFixed(7));
 }
 
 let firstNum = "";
@@ -87,15 +61,19 @@ function operate(num1, op, num2) {
 }
 
 function display() {
-
   numbers.forEach((number) => {
     number.addEventListener("click", () => {
       let numberValue = number.getAttribute("value");
-      if (operator === "") {
+      if (operator === "=") {
+        firstNum = "";
+        operator = "";
+        numberDisplay.textContent = "";
         firstNum += numberValue;
         numberDisplay.textContent = firstNum;
-        
-      }else{
+      }else if (operator === "") {
+        firstNum += numberValue;
+        numberDisplay.textContent = firstNum;
+      } else {
         secondNum += numberValue;
         numberDisplay.textContent = `${firstNum}${operator}${secondNum}`;
       }
@@ -105,15 +83,20 @@ function display() {
   decimal.addEventListener("click", () => {
     let decimalValue = decimal.getAttribute("value");
     if (decimalIsAllowed) {
-      if(operator === ""){
+      if (operator === "") {
         firstNum += decimalValue;
         numberDisplay.textContent = firstNum;
-      }else{
+      } else if (operator === "=") {
+        firstNum = 0;
+        operator = "";
+        numberDisplay.textContent = "";
+        firstNum += decimalValue;
+        numberDisplay.textContent = firstNum;
+      } else {
         secondNum += decimalValue;
         numberDisplay.textContent = `${firstNum}${operator}${secondNum}`;
       }
 
-      
       decimalIsAllowed = false;
       return;
     }
@@ -124,26 +107,41 @@ function display() {
       decimalIsAllowed = true;
       let operatorValue = op.getAttribute("value");
       if (operatorValue !== "=") {
-        if (operator !== "") {
-          operate(firstNum, operator, secondNum);
-          firstNum = numberDisplay.textContent;
+        if (operatorValue !== "") {
+         
+          if (firstNum !== "" && secondNum === "") {
+            operator = operatorValue;
+            numberDisplay.textContent = `${firstNum}${operator}`;
+          } else if (firstNum !== "" && secondNum !== ""){
+            operate(firstNum, operator, secondNum);
+            firstNum = numberDisplay.textContent;
+            secondNum = "";
+            operator = operatorValue;
+            numberDisplay.textContent += operator;
+          }
+            
+            
+          if (operatorValue === "-" && firstNum === "") {
+              firstNum = operatorValue;
+              numberDisplay.textContent = firstNum;
+            } else if (operatorValue !== "-" && firstNum === "") {
+              return;
+            } 
           secondNum = "";
-          operator = operatorValue;
-          numberDisplay.textContent += operator;
-        } else {
-          operator = operatorValue;
-          numberDisplay.textContent += operator;
+          console.log(`first num = ${firstNum}`);
+          console.log(operator);
+          console.log(`second num = ${secondNum}`);
         }
-      } else {
-        operate(firstNum, operator, secondNum);
-        console.log(operator);
-        firstNum = numberDisplay.textContent;
-        operator = "";
-      }
-      secondNum = "";
-      console.log(`first num = ${firstNum}`);
-      console.log(operator);
-      console.log(`second num = ${secondNum}`);
+      }else {
+        if(secondNum === ""){
+          return
+        }else{
+              operate(firstNum, operator, secondNum);
+              operator = operatorValue;
+              firstNum = numberDisplay.textContent;
+              // operator = "";
+        }
+            }
     });
   });
 
@@ -151,30 +149,30 @@ function display() {
     if (numberDisplay.textContent !== "") {
       firstNum = "";
       secondNum = "";
-      operator = ""
+      operator = "";
       numberDisplay.textContent = "";
-    }else{
-      return
+      decimalIsAllowed = true;
+    } else {
+      return;
     }
   });
 
   del.addEventListener("click", () => {
-    let str = numberDisplay.textContent
-    if(str !== "" && str.length > 0){
-      if(secondNum !== ""){
-      secondNum = secondNum.slice(0, -1);
-      console.log(`del 2nd num : ${secondNum}`)
-     }else if(operator !== "" ){
-      operator = operator.slice(0, -1);
-      console.log(`del operator : ${operator}`)
-     } else if(secondNum === "" && operator === ""){
-      firstNum = firstNum.slice(0, -1);
-      console.log(`del first num : ${firstNum}`)
-     }
-    numberDisplay.textContent = str.slice(0, -1)
+    let str = numberDisplay.textContent;
+    if (str !== "" && str.length > 0) {
+      if (secondNum !== "") {
+        secondNum = secondNum.slice(0, -1);
+        console.log(`del 2nd num : ${secondNum}`);
+      } else if (operator !== "") {
+        operator = operator.slice(0, -1);
+        console.log(`del operator : ${operator}`);
+      } else if (secondNum === "" && operator === "") {
+        firstNum = firstNum.slice(0, -1);
+        console.log(`del first num : ${firstNum}`);
+      }
+      numberDisplay.textContent = str.slice(0, -1);
     }
-    
-  })
+  });
 }
 
 display();
